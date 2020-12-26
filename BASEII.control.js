@@ -307,25 +307,31 @@ function setup_modes()
 	{
 		post('channelControlsSub entered');
 		sendSysex(LIVEBUTTONMODE);
-		for(var i=0;i<8;i++)
+		for(var i=0;i<7;i++)
 		{
 			mixer.channelstrip(i)._mute.set_control(grid.get_button(i, 0));
 			mixer.channelstrip(i)._solo.set_control(grid.get_button(i, 1));
 			mixer.channelstrip(i)._arm.set_control(grid.get_button(i, 2));
 			mixer.channelstrip(i)._stop.set_control(grid.get_button(i, 3));
 		}
+		transport._stop.set_control(grid.get_button(7, 0));
+		transport._play.set_control(grid.get_button(7, 1));
+		transport._record.set_control(grid.get_button(7, 2));
 		channelControlsSub.active = true;
 	}
 	channelControlsSub.exit_mode = function()
 	{
 		post('channelControlsSub exit');
-		for(var i=0;i<8;i++)
+		for(var i=0;i<7;i++)
 		{
 			mixer.channelstrip(i)._mute.set_control();
 			mixer.channelstrip(i)._solo.set_control();
 			mixer.channelstrip(i)._arm.set_control();
 			mixer.channelstrip(i)._stop.set_control();
 		}
+		transport._stop.set_control();
+		transport._play.set_control();
+		transport._record.set_control();
 		channelControlsSub.active = false;
 	}
 
